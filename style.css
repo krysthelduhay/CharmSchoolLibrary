@@ -1,0 +1,694 @@
+:root {
+  --bg: #160817; /* Very dark purple background color */
+  --plum: #2a102d; /* Deep plum color */
+  --pink: #ed65b4; /* Main pink accent color */
+  --gold: #e9c875; /* Main gold accent color */
+  --gold-light: #ffe9a8; /* Lighter gold for labels and glows */
+  --white: #fff9fd; /* Soft white for headings */
+  --text: #f6eaf2; /* Default text color */
+  --muted: #cbb6c7; /* Dimmer text for descriptions */
+  --glass: rgba(48, 17, 51, 0.82); /* See-through purple for cards */
+  --border: rgba(233, 200, 117, 0.35); /* Soft gold border color */
+  --shadow: rgba(0, 0, 0, 0.5); /* Shadow color */
+  --transition: 0.3s ease; /* Speed of hover animations */
+}
+
+/* ==================== RESET ==================== */
+/* Applies to every element on the page */
+* {
+  box-sizing: border-box; /* Padding and border are included in an element's width */
+  margin: 0; /* Removes default outer spacing */
+  padding: 0; /* Removes default inner spacing */
+}
+/* Rules for the whole page element */
+html {
+  scroll-behavior: smooth; /* Makes scrolling animate smoothly */
+}
+
+/* ==================== BODY ==================== */
+body {
+  min-height: 100vh; /* Page is at least as tall as the screen */
+  overflow-x: hidden; /* Hides sideways scrolling */
+  color: var(--text); /* Default text color */
+  font-family: "Segoe UI", Arial, sans-serif; /* Default font, with backups */
+  background:
+    radial-gradient(
+      circle at 15% 10%,
+      /* Pink glow near the top left */ rgba(237, 101, 180, 0.18),
+      transparent 28%
+    ),
+    radial-gradient(
+      circle at 85% 15%,
+      /* Gold glow near the top right */ rgba(233, 200, 117, 0.1),
+      transparent 25%
+    ),
+    radial-gradient(
+      circle at 50% 80%,
+      /* Purple glow near the bottom middle */ rgba(113, 35, 111, 0.25),
+      transparent 35%
+    ),
+    linear-gradient(135deg, #0d050f, #1b0a20 48%, #110611); /* Dark diagonal base gradient */
+}
+
+/* Decorative blurred pink circle at the top of the page */
+body::before {
+  content: ""; /* Required to make the pseudo-element appear */
+  position: fixed; /* Stays in place while scrolling */
+  z-index: 0; /* Sits behind the content */
+  top: -260px; /* Pushes it partly off the top of the screen */
+  left: 50%; /* Starts at the horizontal middle */
+  width: 600px; /* Circle width */
+  height: 600px; /* Circle height */
+  border-radius: 50%; /* Turns the square into a circle */
+  transform: translateX(-50%); /* Centers it exactly */
+  background: rgba(237, 101, 180, 0.08); /* Faint pink color */
+  filter: blur(90px); /* Makes the edges very soft */
+  pointer-events: none; /* Clicks pass through it */
+}
+
+/* Decorative sparkle star at the top right */
+body::after {
+  content: "✦"; /* The star symbol */
+  position: fixed; /* Stays in place while scrolling */
+  z-index: 0; /* Sits behind the content */
+  top: 14%; /* Distance from the top */
+  right: 8%; /* Distance from the right */
+  color: var(--gold-light); /* Light gold color */
+  font-size: 25px; /* Star size */
+  text-shadow: 0 0 20px var(--gold); /* Gold glow around the star */
+  animation: sparkle 4s ease-in-out infinite; /* Repeating twinkle animation */
+  pointer-events: none; /* Clicks pass through it */
+}
+
+/* ==================== HEADER ==================== */
+.header {
+  position: relative; /* Lets inner decorations position against it */
+  z-index: 1; /* Layer above the background effects */
+  min-height: 440px; /* Minimum banner height */
+  padding: 90px 25px 120px; /* Top, left/right, bottom spacing */
+  display: flex; /* Enables flexbox for centering */
+  align-items: center; /* Centers content vertically */
+  justify-content: center; /* Centers content horizontally */
+  overflow: hidden; /* Hides anything that spills out */
+  text-align: center; /* Centers the text */
+  background:
+    radial-gradient(
+      ellipse at center,
+      /* Pink glow in the middle of the banner */ rgba(237, 101, 180, 0.2),
+      transparent 55%
+    ),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.025), transparent); /* Faint light fade from the top */
+}
+
+/* Decorative ring behind the title */
+.header::before {
+  content: ""; /* Required to make the pseudo-element appear */
+  position: absolute; /* Positioned inside the header */
+  width: 570px; /* Ring width */
+  height: 570px; /* Ring height */
+  border: 1px solid rgba(233, 200, 117, 0.2); /* Thin gold outline */
+  border-radius: 50%; /* Makes it a circle */
+  box-shadow:
+    0 0 100px rgba(237, 101, 180, 0.1),
+    /* Outer pink glow */ inset 0 0 90px rgba(237, 101, 180, 0.08); /* Inner pink glow */
+  pointer-events: none; /* Clicks pass through it */
+}
+
+/* Wrapper for the header text */
+.header-content {
+  position: relative; /* Needed for z-index to work */
+  z-index: 2; /* Stays above the ring */
+  max-width: 850px; /* Limits how wide the text can be */
+  animation: fadeUp 0.8s ease both; /* Fades and slides up on load */
+}
+
+/* Small uppercase text above the title */
+.subtitle {
+  margin-bottom: 18px; /* Space below it */
+  color: var(--gold-light); /* Light gold color */
+  font-size: 0.72rem; /* Small text */
+  font-weight: 800; /* Extra bold */
+  letter-spacing: 0.35em; /* Wide spacing between letters */
+  text-transform: uppercase; /* Makes all letters capital */
+}
+
+/* Main page title */
+.header h1 {
+  color: var(--white); /* Fallback color */
+  font-family: Georgia, "Times New Roman", serif; /* Elegant serif font */
+  font-size: clamp(
+    3rem,
+    7vw,
+    6rem
+  ); /* Size that grows with the screen (min, ideal, max) */
+  font-weight: 500; /* Medium weight */
+  line-height: 0.95; /* Tight space between lines */
+  letter-spacing: -0.04em; /* Slightly tighter letters */
+  background: linear-gradient(
+    110deg,
+    #fff 10%,
+    #ffb5dd 40%,
+    #ffe9a8 65%,
+    #fff 90%
+  ); /* White, pink, and gold gradient behind the text */
+  background-size: 220% auto; /* Makes the gradient wider so it can slide */
+  -webkit-background-clip: text; /* Clips the gradient to the text shape (Safari/Chrome) */
+  background-clip: text; /* Clips the gradient to the text shape (standard) */
+  -webkit-text-fill-color: transparent; /* Makes the text see-through so the gradient shows */
+  animation: textShine 8s linear infinite; /* Shine slides across forever */
+  filter: drop-shadow(
+    0 8px 20px rgba(237, 101, 180, 0.25)
+  ); /* Soft pink shadow */
+}
+
+/* Welcome message under the title */
+.description {
+  max-width: 620px; /* Limits text width */
+  margin: 26px auto 0; /* Space above, centered horizontally */
+  color: var(--muted); /* Dimmer text color */
+  font-size: 1rem; /* Normal text size */
+  line-height: 1.8; /* Roomy line spacing */
+}
+
+/* ==================== MAIN CONTAINER ==================== */
+.container {
+  position: relative; /* Needed for z-index to work */
+  z-index: 2; /* Sits above the header and background */
+  width: min(
+    1100px,
+    calc(100% - 32px)
+  ); /* Up to 1100px wide, with 16px side gaps */
+  margin: -65px auto 80px; /* Overlaps the header, centered, space below */
+  display: grid; /* Stacks the cards using grid */
+  gap: 30px; /* Space between cards */
+}
+
+/* ==================== CARDS ==================== */
+.card {
+  position: relative; /* Needed for inner positioning */
+  overflow: hidden; /* Hides anything that spills out */
+  padding: clamp(26px, 4vw, 42px); /* Padding that grows with the screen */
+  background:
+    linear-gradient(
+      135deg,
+      /* Light glassy shine across the card */ rgba(255, 255, 255, 0.08),
+      rgba(255, 255, 255, 0.025)
+    ),
+    var(--glass); /* Purple see-through base */
+  border: 1px solid var(--border); /* Thin gold border */
+  border-radius: 28px 8px 28px 8px; /* Alternating big and small rounded corners */
+  box-shadow:
+    0 25px 70px var(--shadow),
+    /* Big dark shadow below */ 0 0 40px rgba(237, 101, 180, 0.06),
+    /* Faint pink glow */ inset 0 1px rgba(255, 255, 255, 0.1); /* Thin light line on the top inside edge */
+  backdrop-filter: blur(20px); /* Blurs whatever is behind the card */
+  -webkit-backdrop-filter: blur(20px); /* Same blur for Safari */
+  animation: fadeUp 0.8s ease both; /* Fades and slides up on load */
+  transition: var(--transition); /* Smooth hover changes */
+}
+
+/* Card look when the mouse is over it */
+.card:hover {
+  border-color: rgba(237, 101, 180, 0.48); /* Border turns pink */
+  box-shadow:
+    0 30px 75px rgba(0, 0, 0, 0.55),
+    /* Slightly bigger shadow */ 0 0 35px rgba(237, 101, 180, 0.1); /* Stronger pink glow */
+}
+
+/* Shifts each card sideways a little for a stacked, playful look */
+.card:nth-child(2) {
+  transform: translateX(10px); /* 2nd card moves right */
+}
+.card:nth-child(3) {
+  transform: translateX(-7px); /* 3rd card (Results) moves left */
+}
+.card:nth-child(4) {
+  transform: translateX(12px); /* 4th card (Tools) moves right */
+}
+.card:nth-child(5) {
+  transform: translateX(
+    -5px
+  ); /* 5th card moves left (unused now, safe to keep) */
+}
+
+/* ==================== SECTION TITLES ==================== */
+.section-title {
+  display: flex; /* Puts the star and text side by side */
+  align-items: flex-start; /* Aligns them to the top */
+  gap: 14px; /* Space between the star and text */
+  margin-bottom: 30px; /* Space below the title */
+}
+
+/* Star symbol before each section title */
+.section-title::before {
+  content: "✦"; /* The star symbol */
+  margin-top: 4px; /* Nudges it down slightly */
+  color: var(--gold-light); /* Light gold color */
+  font-size: 1.2rem; /* Star size */
+  text-shadow: 0 0 15px var(--gold); /* Gold glow */
+}
+
+/* Section headings (h2) */
+.section-title h2 {
+  color: var(--white); /* Soft white color */
+  font-family: Georgia, "Times New Roman", serif; /* Serif font */
+  font-size: clamp(1.6rem, 3vw, 2.25rem); /* Responsive size */
+  font-weight: 500; /* Medium weight */
+  line-height: 1.1; /* Tight line spacing */
+}
+
+/* Small description under each section heading */
+.section-title p {
+  margin-top: 7px; /* Space above */
+  color: var(--muted); /* Dimmer color */
+  font-size: 0.85rem; /* Small text */
+  line-height: 1.5; /* Line spacing */
+}
+
+/* ==================== FORM ==================== */
+#libraryForm {
+  display: grid; /* Uses grid layout */
+  grid-template-columns: repeat(2, minmax(0, 1fr)); /* Two equal columns */
+  gap: 22px; /* Space between fields */
+}
+
+/* One label + input pair */
+.form-group {
+  display: flex; /* Flexbox layout */
+  flex-direction: column; /* Stacks label above input */
+  gap: 9px; /* Space between label and input */
+}
+
+/* The 3rd group (Book Title) stretches across both columns */
+.form-group:nth-child(3) {
+  grid-column: span 2; /* Takes up 2 columns */
+}
+
+/* Labels for the form and the Find tool */
+.form-group label,
+.operation-input label {
+  color: var(--gold-light); /* Light gold color */
+  font-size: 0.72rem; /* Small text */
+  font-weight: 800; /* Extra bold */
+  letter-spacing: 0.13em; /* Spaced-out letters */
+  text-transform: uppercase; /* All capital letters */
+}
+
+/* Text boxes, number box, date picker, and dropdown */
+input,
+select {
+  width: 100%; /* Fills the available width */
+  min-height: 48px; /* Minimum height */
+  padding: 13px 16px; /* Inner spacing */
+  color: var(--white); /* Typed text color */
+  background: rgba(9, 3, 12, 0.72); /* Dark see-through background */
+  border: 1px solid rgba(237, 101, 180, 0.22); /* Faint pink border */
+  border-radius: 14px 5px 14px 5px; /* Alternating rounded corners */
+  outline: none; /* Removes the default browser outline */
+  font: inherit; /* Uses the same font as the page */
+  transition: var(--transition); /* Smooth hover/focus changes */
+}
+
+/* Placeholder text (the gray example text) */
+input::placeholder {
+  color: #806a7c; /* Muted purple-gray */
+}
+/* Dropdown behavior */
+select {
+  cursor: pointer; /* Shows a hand cursor */
+}
+/* Dropdown choices */
+select option {
+  color: #fff; /* White text */
+  background: #28102d; /* Dark plum background */
+}
+/* Hover effect for inputs and dropdowns */
+input:hover,
+select:hover {
+  border-color: rgba(237, 101, 180, 0.5); /* Border gets brighter pink */
+}
+
+/* Focus effect when the user clicks into a field */
+input:focus,
+select:focus {
+  border-color: var(--pink); /* Solid pink border */
+  background: rgba(237, 101, 180, 0.08); /* Slight pink tint */
+  box-shadow: 0 0 0 3px rgba(237, 101, 180, 0.08); /* Soft ring around the field */
+}
+
+/* ==================== BUTTONS ==================== */
+button {
+  min-height: 46px; /* Minimum height */
+  padding: 12px 20px; /* Inner spacing */
+  color: #281021; /* Dark text color */
+  background: linear-gradient(
+    110deg,
+    var(--gold),
+    #fff0b9,
+    #f4b8d9,
+    var(--gold)
+  ); /* Gold-to-pink gradient */
+  background-size: 250% auto; /* Wider gradient so it can slide on hover */
+  border: 1px solid rgba(255, 232, 166, 0.8); /* Light gold border */
+  border-radius: 13px 5px 13px 5px; /* Alternating rounded corners */
+  font: inherit; /* Uses the same font as the page */
+  font-weight: 800; /* Extra bold */
+  cursor: pointer; /* Shows a hand cursor */
+  box-shadow:
+    0 8px 22px rgba(233, 200, 117, 0.14),
+    /* Soft gold shadow */ inset 0 1px rgba(255, 255, 255, 0.75); /* Light line on the top inside edge */
+  transition: var(--transition); /* Smooth hover changes */
+}
+
+/* Button when the mouse is over it */
+button:hover {
+  background-position: 100% center; /* Slides the gradient */
+  transform: translateY(-2px); /* Lifts the button up slightly */
+  box-shadow: 0 12px 28px rgba(237, 101, 180, 0.15); /* Pink shadow */
+}
+
+/* Button while being pressed */
+button:active {
+  transform: translateY(0); /* Drops back down */
+}
+
+/* The "Add Borrowing Record" button */
+#addButton {
+  grid-column: span 2; /* Spans both form columns */
+  justify-self: start; /* Aligns to the left */
+  min-width: 235px; /* Minimum width */
+  margin-top: 4px; /* Small space above */
+}
+
+/* ==================== RECORD LIST ==================== */
+/* Box around the list of records */
+.record-list-container {
+  min-height: 90px; /* Keeps a minimum height even when empty */
+  padding: 7px; /* Inner spacing */
+  background: rgba(5, 2, 8, 0.35); /* Dark see-through background */
+  border: 1px solid rgba(233, 200, 117, 0.14); /* Faint gold border */
+  border-radius: 18px 6px 18px 6px; /* Alternating rounded corners */
+}
+
+/* The <ul> list itself */
+#recordList {
+  display: grid; /* Grid layout */
+  gap: 9px; /* Space between records */
+  list-style: none; /* Removes bullet points */
+}
+
+/* Message shown when the list has no records */
+#recordList:empty::before {
+  content: "No royal borrowing records yet."; /* The message text */
+  display: block; /* Shows it on its own line */
+  padding: 26px; /* Inner spacing */
+  color: #806a7c; /* Muted color */
+  text-align: center; /* Centers the text */
+  font-style: italic; /* Slanted text */
+}
+
+/* Each record row */
+#recordList li {
+  padding: 16px 20px; /* Inner spacing */
+  color: var(--text); /* Text color */
+  background: linear-gradient(
+    90deg,
+    rgba(237, 101, 180, 0.13),
+    rgba(255, 255, 255, 0.025)
+  ); /* Pink fade from left to right */
+  border-left: 3px solid var(--pink); /* Pink bar on the left */
+  border-radius: 4px 15px 15px 4px; /* Rounded corners */
+  transition: var(--transition); /* Smooth hover changes */
+}
+
+/* Record row when hovered */
+#recordList li:hover {
+  padding-left: 24px; /* Text slides slightly to the right */
+  border-left-color: var(--gold); /* Left bar turns gold */
+}
+
+/* ==================== RECORD COUNT ==================== */
+.record-count {
+  display: flex; /* Flexbox layout */
+  justify-content: flex-end; /* Pushes the count to the right */
+  margin-top: 15px; /* Space above */
+}
+
+/* The pill-shaped box around the count */
+.record-count p {
+  padding: 9px 16px; /* Inner spacing */
+  color: var(--muted); /* Dimmer color */
+  font-size: 0.8rem; /* Small text */
+  border: 1px solid rgba(233, 200, 117, 0.2); /* Faint gold border */
+  border-radius: 50px; /* Fully rounded pill shape */
+}
+
+/* The number inside the count */
+.record-count strong {
+  margin-left: 5px; /* Space on the left */
+  color: var(--gold-light); /* Light gold color */
+  font-size: 1rem; /* Slightly bigger than the label */
+}
+
+/* ==================== OPERATIONS (TOOLS) ==================== */
+/* One row per tool */
+.operation {
+  display: flex; /* Flexbox layout */
+  align-items: center; /* Centers vertically */
+  justify-content: space-between; /* Text on the left, button on the right */
+  gap: 30px; /* Space between text and button */
+  padding: 23px 0; /* Space above and below */
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08); /* Faint divider line */
+}
+
+/* The last row has no divider and no extra bottom space */
+.operation:last-child {
+  padding-bottom: 0; /* Removes bottom spacing */
+  border-bottom: none; /* Removes the divider */
+}
+
+/* Text side of a tool row */
+.operation-info {
+  flex: 1; /* Takes up the remaining space */
+  max-width: 650px; /* Limits the text width */
+}
+
+/* Tool name */
+.operation-info h3 {
+  color: var(--white); /* Soft white */
+  font-family: Georgia, "Times New Roman", serif; /* Serif font */
+  font-size: 1.15rem; /* Text size */
+  font-weight: 500; /* Medium weight */
+}
+
+/* Tool description */
+.operation-info p {
+  margin-top: 6px; /* Space above */
+  color: var(--muted); /* Dimmer color */
+  font-size: 0.84rem; /* Small text */
+  line-height: 1.6; /* Line spacing */
+}
+
+/* Group holding the Find label, input, and button */
+.operation-input {
+  position: relative; /* Lets the label position inside it */
+  min-width: 310px; /* Minimum width */
+  padding-top: 16px; /* Room for the label above */
+  display: flex; /* Flexbox layout */
+  align-items: center; /* Centers vertically */
+  justify-content: flex-end; /* Pushes items to the right */
+  gap: 10px; /* Space between input and button */
+}
+
+/* Label placed above the index input */
+.operation-input label {
+  position: absolute; /* Positioned freely inside the group */
+  top: -1px; /* Near the top */
+  left: 0; /* Aligned to the left */
+  white-space: nowrap; /* Keeps the label on one line */
+}
+
+/* The index number input */
+.operation-input input {
+  width: 130px; /* Fixed width */
+  min-width: 130px; /* Prevents shrinking */
+  height: 46px; /* Same height as buttons */
+}
+
+/* Make every tool button the same size */
+.operation > button,
+.operation-input button {
+  width: 170px; /* Fixed width */
+  min-width: 170px; /* Prevents shrinking */
+  height: 46px; /* Fixed height */
+  min-height: 46px; /* Prevents shrinking */
+  display: flex; /* Flexbox for centering the text */
+  align-items: center; /* Centers text vertically */
+  justify-content: center; /* Centers text horizontally */
+  white-space: nowrap; /* Keeps the text on one line */
+}
+
+/* Slightly smaller text on tool buttons */
+.operation button {
+  font-size: 0.82rem; /* Button text size */
+}
+
+/* ==================== RESULT BOX ==================== */
+.result-box {
+  min-height: 110px; /* Minimum height */
+  padding: 25px; /* Inner spacing */
+  display: flex; /* Flexbox layout */
+  align-items: center; /* Centers text vertically */
+  background:
+    radial-gradient(
+      circle at 90% 10%,
+      /* Pink glow in the top right corner */ rgba(237, 101, 180, 0.14),
+      transparent 35%
+    ),
+    rgba(5, 2, 8, 0.45); /* Dark see-through base */
+  border: 1px solid rgba(233, 200, 117, 0.2); /* Faint gold border */
+  border-radius: 22px 6px 22px 6px; /* Alternating rounded corners */
+}
+
+/* Text inside the result box */
+.result-box p {
+  width: 100%; /* Fills the box */
+  color: var(--muted); /* Dimmer color */
+  line-height: 1.7; /* Line spacing */
+  overflow-wrap: anywhere; /* Breaks long text so it doesn't overflow */
+}
+
+/* ==================== FOOTER ==================== */
+.footer {
+  position: relative; /* Needed for z-index to work */
+  z-index: 1; /* Layer above the background */
+  padding: 55px 20px 65px; /* Top, sides, bottom spacing */
+  text-align: center; /* Centers the text */
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    rgba(5, 2, 8, 0.85)
+  ); /* Fades to dark at the bottom */
+}
+
+/* First footer line */
+.footer p:first-child {
+  color: var(--gold-light); /* Light gold color */
+  font-family: Georgia, "Times New Roman", serif; /* Serif font */
+  font-size: 1.2rem; /* Larger text */
+}
+
+/* Second footer line */
+.footer p:last-child {
+  margin-top: 8px; /* Space above */
+  color: var(--muted); /* Dimmer color */
+  font-size: 0.72rem; /* Small text */
+  letter-spacing: 0.18em; /* Spaced-out letters */
+  text-transform: uppercase; /* All capital letters */
+}
+
+/* ==================== ANIMATIONS ==================== */
+/* Fade in while sliding up */
+@keyframes fadeUp {
+  from {
+    opacity: 0; /* Starts invisible */
+    transform: translateY(25px); /* Starts 25px lower */
+  }
+  to {
+    opacity: 1; /* Ends fully visible */
+    transform: translateY(0); /* Ends at its normal position */
+  }
+}
+
+/* Slides the gradient across the title text */
+@keyframes textShine {
+  to {
+    background-position: 220% center; /* Moves the gradient to the far side */
+  }
+}
+
+/* Twinkling star animation */
+@keyframes sparkle {
+  0%,
+  100% {
+    opacity: 0.4; /* Dim at start and end */
+    transform: translateY(0) rotate(0); /* Normal position, no rotation */
+  }
+  50% {
+    opacity: 1; /* Fully bright in the middle */
+    transform: translateY(-10px) rotate(15deg); /* Floats up and tilts */
+  }
+}
+
+/* ==================== MOBILE (screens 760px or smaller) ==================== */
+@media (max-width: 760px) {
+  .header {
+    min-height: 390px; /* Shorter banner */
+    padding: 70px 20px 100px; /* Smaller padding */
+  }
+  .header h1 {
+    font-size: clamp(2.7rem, 13vw, 4.5rem); /* Title size tuned for phones */
+  }
+  .container {
+    width: min(calc(100% - 20px), 650px); /* Narrower container */
+    margin-top: -45px; /* Less overlap with the header */
+  }
+
+  /* Removes the sideways card shifts on small screens */
+  .card:nth-child(2),
+  .card:nth-child(3),
+  .card:nth-child(4),
+  .card:nth-child(5) {
+    transform: none; /* No shifting */
+  }
+
+  #libraryForm {
+    grid-template-columns: 1fr; /* One column instead of two */
+  }
+  /* Fields and button no longer need to span 2 columns */
+  .form-group:nth-child(3),
+  #addButton {
+    grid-column: auto; /* Normal single-column placement */
+  }
+  #addButton {
+    width: 100%; /* Full-width button */
+  }
+
+  .operation {
+    align-items: flex-start; /* Aligns to the left */
+    flex-direction: column; /* Stacks text above the button */
+  }
+
+  .operation-info {
+    width: 100%; /* Full width */
+  }
+  .operation > button {
+    width: 100%; /* Full-width button */
+    min-width: 100%; /* Keeps it full width */
+  }
+  .operation-input {
+    width: 100%; /* Full width */
+    min-width: 0; /* Removes the minimum width */
+    padding-top: 17px; /* Room for the label */
+  }
+  .operation-input input {
+    flex: 1; /* Input fills the leftover space */
+    width: auto; /* Width controlled by flex */
+    min-width: 0; /* Allows shrinking */
+  }
+  .operation-input button {
+    width: 170px; /* Keeps the Find button's size */
+    min-width: 170px; /* Prevents shrinking */
+  }
+}
+
+/* ==================== REDUCED MOTION ==================== */
+/* For people who set their device to reduce animations */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before {
+    animation: none !important; /* Turns off animations */
+    transition: none !important; /* Turns off hover transitions */
+    scroll-behavior: auto !important; /* Turns off smooth scrolling */
+  }
+}

@@ -1,0 +1,262 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Charm School Library</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- ==================== HEADER ==================== -->
+    <!-- Top banner of the page -->
+    <header class="header">
+      <!-- Wrapper that centers and animates the header text -->
+      <div class="header-content">
+        <!-- Small uppercase text above the title -->
+        <p class="subtitle">ROYAL LIBRARY RECORDS</p>
+        <!-- Main heading (the page title) -->
+        <h1>Charm School Library</h1>
+        <!-- Short welcome message under the title -->
+        <p class="description">
+          Welcome to the Charm School Library! Keep track of students and the
+          books they borrow.
+        </p>
+      </div>
+    </header>
+
+    <main class="container">
+      <!-- ==================== ADD RECORD ==================== -->
+      <!-- Card 1: the form for adding a new record -->
+      <section class="card add-record-section">
+        <!-- Title area of this card -->
+        <div class="section-title">
+          <!-- Groups the heading and its description -->
+          <div>
+            <!-- Card heading -->
+            <h2>New Borrowing Record</h2>
+            <!-- Short explanation of the card -->
+            <p>Record a student's borrowed book.</p>
+          </div>
+        </div>
+        <!-- Form that holds all the input fields -->
+        <form id="libraryForm">
+          <!-- Student Name -->
+          <!-- Group for one label + its input -->
+          <div class="form-group">
+            <!-- Label connected to the input with the matching id -->
+            <label for="studentName">Student Name</label>
+            <!-- Text box where the user types the student's name -->
+            <input
+              type="text"
+              id="studentName"
+              name="studentName"
+              placeholder="e.g. Blair Willows"
+            />
+          </div>
+
+          <!-- Student ID -->
+          <!-- Group for the student ID field -->
+          <div class="form-group">
+            <!-- Label for the student ID input -->
+            <label for="studentId">Student ID</label>
+            <!-- Text box where the user types the student's ID -->
+            <input
+              type="text"
+              id="studentId"
+              name="studentId"
+              placeholder="e.g. PCS-001"
+            />
+          </div>
+
+          <!-- Book Title -->
+          <!-- Group for the book title field -->
+          <div class="form-group">
+            <!-- Label for the book title input -->
+            <label for="bookTitle">Book Title</label>
+            <!-- Text box where the user types the book title -->
+            <input
+              type="text"
+              id="bookTitle"
+              name="bookTitle"
+              placeholder="e.g. The Secret Garden"
+            />
+          </div>
+
+          <!-- Book Category -->
+          <!-- Group for the category dropdown -->
+          <div class="form-group">
+            <!-- Label for the category dropdown -->
+            <label for="bookCategory">Book Category</label>
+            <!-- Dropdown menu for choosing a category -->
+            <select id="bookCategory" name="bookCategory">
+              <!-- Default option with no value (acts as a placeholder) -->
+              <option value="">Select a category</option>
+              <!-- Category options the user can pick from -->
+              <option value="Fiction">Fiction</option>
+              <option value="Fantasy">Fantasy</option>
+              <option value="Mystery">Mystery</option>
+              <option value="Romance">Romance</option>
+              <option value="Educational">Educational</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+
+          <!-- Borrow Date -->
+          <!-- Group for the date field -->
+          <div class="form-group">
+            <!-- Label for the date input -->
+            <label for="borrowDate">Borrow Date</label>
+            <!-- Date picker for choosing the borrow date -->
+            <input type="date" id="borrowDate" name="borrowDate" />
+          </div>
+
+          <!-- Add Button -->
+          <!-- type="button" stops the form from reloading the page; JavaScript handles the click -->
+          <button type="button" id="addButton">Add Borrowing Record</button>
+        </form>
+      </section>
+
+      <!-- ==================== LIBRARY RECORDS ==================== -->
+      <!-- Card 2: shows the current list of records -->
+      <section class="card records-section">
+        <!-- Title area of this card -->
+        <div class="section-title">
+          <!-- Groups the heading and its description -->
+          <div>
+            <!-- Card heading -->
+            <h2>Current Library Records</h2>
+            <!-- Short explanation of the card -->
+            <p>Students and their borrowed books.</p>
+          </div>
+        </div>
+
+        <!-- Array List -->
+        <!-- Box that surrounds the list of records -->
+        <div class="record-list-container">
+          <!-- Empty list; JavaScript fills it with <li> items -->
+          <ul id="recordList">
+            <!-- JavaScript will display the records here -->
+          </ul>
+        </div>
+
+        <!-- Array Length -->
+        <!-- Area that shows the total number of records -->
+        <div class="record-count">
+          <!-- <strong id="recordLength"> is updated by JavaScript with the array length -->
+          <p>Total Borrowing Records: <strong id="recordLength">0</strong></p>
+        </div>
+      </section>
+
+      <!-- ==================== RESULTS (now above the tools) ==================== -->
+      <!-- The id "resultsSection" is what script.js scrolls to -->
+      <!-- Card 3: shows the output of the tools below -->
+      <section class="card results-section" id="resultsSection">
+        <!-- Title area of this card -->
+        <div class="section-title">
+          <!-- Groups the heading and its description -->
+          <div>
+            <!-- Card heading -->
+            <h2>Library Results</h2>
+            <!-- Short explanation of the card -->
+            <p>Results from the selected library operation.</p>
+          </div>
+        </div>
+        <!-- Box where JavaScript displays messages and results -->
+        <div id="result" class="result-box">
+          <!-- Default message shown before any action -->
+          <p>Results will appear here.</p>
+        </div>
+      </section>
+
+      <!-- ==================== ARRAY OPERATIONS ==================== -->
+      <!-- Card 4: the buttons that perform array operations -->
+      <section class="card operations-section">
+        <!-- Title area of this card -->
+        <div class="section-title">
+          <!-- Groups the heading and its description -->
+          <div>
+            <!-- Card heading -->
+            <h2>Library Record Tools</h2>
+            <!-- Short explanation of the card -->
+            <p>Manage and search the borrowing records.</p>
+          </div>
+        </div>
+
+        <!-- Remove Last -->
+        <!-- One row for the pop() tool -->
+        <div class="operation">
+          <!-- Text part of the row -->
+          <div class="operation-info">
+            <!-- Tool name -->
+            <h3>Remove Last Record</h3>
+            <!-- Tool description -->
+            <p>Remove the most recently added borrowing record.</p>
+          </div>
+          <!-- Button that removes the last record (handled in script.js) -->
+          <button type="button" id="removeButton">Remove Last</button>
+        </div>
+
+        <!-- Find by Index -->
+        <!-- One row for the at() tool -->
+        <div class="operation">
+          <!-- Text part of the row -->
+          <div class="operation-info">
+            <!-- Tool name -->
+            <h3>Find a Record</h3>
+            <!-- Tool description -->
+            <p>Enter the record index to find a specific borrowing record.</p>
+          </div>
+          <!-- Group holding the label, number input, and Find button -->
+          <div class="operation-input">
+            <!-- Label for the index input -->
+            <label for="indexInput">Record Index</label>
+            <!-- Number-only input; min="0" blocks negative numbers in the spinner -->
+            <input type="number" id="indexInput" min="0" placeholder="e.g. 0" />
+            <!-- Button that finds the record at the typed index -->
+            <button type="button" id="findButton">Find</button>
+          </div>
+        </div>
+
+        <!-- Join -->
+        <!-- One row for the join() tool -->
+        <div class="operation">
+          <!-- Text part of the row -->
+          <div class="operation-info">
+            <!-- Tool name -->
+            <h3>Join Records</h3>
+            <!-- Tool description -->
+            <p>
+              Combine all library records into one string using a separator.
+            </p>
+          </div>
+          <!-- Button that joins all records using a separator -->
+          <button type="button" id="joinButton">Join Records</button>
+        </div>
+
+        <!-- ToString -->
+        <!-- One row for the toString() tool -->
+        <div class="operation">
+          <!-- Text part of the row -->
+          <div class="operation-info">
+            <!-- Tool name -->
+            <h3>Convert to String</h3>
+            <!-- Tool description -->
+            <p>Convert the library records into a comma-separated string.</p>
+          </div>
+          <!-- Button that converts the array to a string -->
+          <button type="button" id="stringButton">Convert to String</button>
+        </div>
+      </section>
+    </main>
+
+    <!-- ==================== FOOTER ==================== -->
+    <footer class="footer">
+      <p>Charm School Library</p>
+      <!-- Footer subtitle; &amp; displays the "&" symbol -->
+      <p>Royal Records &amp; Borrowing Hall</p>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="script.js"></script>
+  </body>
+</html>
