@@ -380,6 +380,45 @@ button:active {
   margin-top: 4px; /* Small space above */
 }
 
+/* ==================== FORM ERROR MESSAGES ==================== */
+/* Small red text shown under an invalid field */
+.error-text {
+  min-height: 0; /* Takes no space when empty */
+  color: #ff8fa3; /* Soft red color */
+  font-size: 0.78rem; /* Small text */
+  line-height: 1.4; /* Line spacing */
+}
+
+/* Red outline on a field that is invalid */
+input.invalid,
+select.invalid {
+  border-color: #ff6b8a; /* Red border */
+  background: rgba(255, 107, 138, 0.08); /* Faint red tint */
+  box-shadow: 0 0 0 3px rgba(255, 107, 138, 0.12); /* Soft red ring */
+}
+
+/* Message under the Add button (spans both form columns) */
+.form-message {
+  grid-column: span 2; /* Takes up 2 columns */
+  font-size: 0.88rem; /* Text size */
+  font-weight: 700; /* Bold */
+}
+
+/* Hides the message box when it has no text */
+.form-message:empty {
+  display: none; /* Removes it completely */
+}
+
+/* Message style for errors */
+.form-message.error {
+  color: #ff8fa3; /* Soft red */
+}
+
+/* Message style for success */
+.form-message.success {
+  color: #9be8b4; /* Soft green */
+}
+
 /* ==================== RECORD LIST ==================== */
 /* Box around the list of records */
 .record-list-container {
@@ -647,7 +686,8 @@ button:active {
   }
   /* Fields and button no longer need to span 2 columns */
   .form-group:nth-child(3),
-  #addButton {
+  #addButton,
+  .form-message {
     grid-column: auto; /* Normal single-column placement */
   }
   #addButton {
