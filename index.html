@@ -1,16 +1,30 @@
+<!-- Tells the browser this file is an HTML5 document -->
 <!doctype html>
+<!-- Root element of the page; lang="en" says the content is in English -->
 <html lang="en">
+  <!-- The head holds information about the page (not shown on screen) -->
   <head>
+    <!-- Uses UTF-8 so special characters like ✦ and & display correctly -->
     <meta charset="UTF-8" />
+    <!-- Makes the page scale properly on phones and small screens -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- The title shown on the browser tab -->
     <title>Charm School Library</title>
+    <!-- Links the external CSS file that styles this page -->
     <link rel="stylesheet" href="style.css" />
   </head>
+  <!-- The body holds everything visible on the page -->
   <body>
-    <header class="header"
+    <!-- ==================== HEADER ==================== -->
+    <!-- Top banner of the page -->
+    <header class="header">
+      <!-- Wrapper that centers and animates the header text -->
       <div class="header-content">
+        <!-- Small uppercase text above the title -->
         <p class="subtitle">ROYAL LIBRARY RECORDS</p>
+        <!-- Main heading (the page title) -->
         <h1>Charm School Library</h1>
+        <!-- Short welcome message under the title -->
         <p class="description">
           Welcome to the Charm School Library! Keep track of students and the
           books they borrow.
@@ -18,6 +32,8 @@
       </div>
     </header>
 
+    <!-- ==================== MAIN CONTENT ==================== -->
+    <!-- Main area that holds all the cards (sections) -->
     <main class="container">
       <!-- ==================== ADD RECORD ==================== -->
       <!-- Card 1: the form for adding a new record -->
@@ -265,6 +281,7 @@
     </footer>
 
     <!-- JavaScript -->
+    <!-- Loads script.js last so all elements above already exist when it runs -->
     <script src="script.js"></script>
   </body>
 </html>
