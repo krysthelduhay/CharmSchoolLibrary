@@ -7,16 +7,10 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <!-- ==================== HEADER ==================== -->
-    <!-- Top banner of the page -->
-    <header class="header">
-      <!-- Wrapper that centers and animates the header text -->
+    <header class="header"
       <div class="header-content">
-        <!-- Small uppercase text above the title -->
         <p class="subtitle">ROYAL LIBRARY RECORDS</p>
-        <!-- Main heading (the page title) -->
         <h1>Charm School Library</h1>
-        <!-- Short welcome message under the title -->
         <p class="description">
           Welcome to the Charm School Library! Keep track of students and the
           books they borrow.
@@ -52,6 +46,8 @@
               name="studentName"
               placeholder="e.g. Blair Willows"
             />
+            <!-- Error text shown under the student name when it is invalid -->
+            <p class="error-text" id="studentNameError"></p>
           </div>
 
           <!-- Student ID -->
@@ -66,6 +62,8 @@
               name="studentId"
               placeholder="e.g. PCS-001"
             />
+            <!-- Error text shown under the student ID when it is invalid -->
+            <p class="error-text" id="studentIdError"></p>
           </div>
 
           <!-- Book Title -->
@@ -80,6 +78,8 @@
               name="bookTitle"
               placeholder="e.g. The Secret Garden"
             />
+            <!-- Error text shown under the book title when it is invalid -->
+            <p class="error-text" id="bookTitleError"></p>
           </div>
 
           <!-- Book Category -->
@@ -99,6 +99,8 @@
               <option value="Educational">Educational</option>
               <option value="Other">Other</option>
             </select>
+            <!-- Error text shown under the category dropdown when it is invalid -->
+            <p class="error-text" id="bookCategoryError"></p>
           </div>
 
           <!-- Borrow Date -->
@@ -108,11 +110,15 @@
             <label for="borrowDate">Borrow Date</label>
             <!-- Date picker for choosing the borrow date -->
             <input type="date" id="borrowDate" name="borrowDate" />
+            <!-- Error text shown under the borrow date when it is invalid -->
+            <p class="error-text" id="borrowDateError"></p>
           </div>
 
           <!-- Add Button -->
           <!-- type="button" stops the form from reloading the page; JavaScript handles the click -->
           <button type="button" id="addButton">Add Borrowing Record</button>
+          <!-- Message under the button: shows "Invalid input" or "Record added" (filled in by JavaScript) -->
+          <p class="form-message" id="formMessage"></p>
         </form>
       </section>
 
@@ -250,7 +256,9 @@
     </main>
 
     <!-- ==================== FOOTER ==================== -->
+    <!-- Bottom area of the page -->
     <footer class="footer">
+      <!-- Footer title line -->
       <p>Charm School Library</p>
       <!-- Footer subtitle; &amp; displays the "&" symbol -->
       <p>Royal Records &amp; Borrowing Hall</p>
